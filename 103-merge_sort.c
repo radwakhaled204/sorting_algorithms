@@ -1,12 +1,4 @@
 #include "sort.h"
-
-/**
- * merge - Merge two subarrays into a single sorted array.
- * @array: Pointer to the array.
- * @l: Index of the left subarray.
- * @m: Index of the middle element.
- * @r: Index of the right subarray.
- */
 void merge(int *array, size_t l, size_t m, size_t r) {
     size_t n1 = m - l + 1;
     size_t n2 = r - m;
@@ -25,6 +17,11 @@ void merge(int *array, size_t l, size_t m, size_t r) {
 
     i = j = 0;
     k = l;
+
+    printf("Merging...\n[left]: ");
+    print_array(L, n1);
+    printf("[right]: ");
+    print_array(R, n2);
 
     while (i < n1 && j < n2) {
         if (L[i] <= R[j]) {
@@ -49,35 +46,18 @@ void merge(int *array, size_t l, size_t m, size_t r) {
         k++;
     }
 
+    printf("[Done]: ");
+    print_array(array + l, n1 + n2);
+
     free(L);
     free(R);
 }
 
-/**
- * merge_sort_recursive - Recursive function to perform Merge Sort.
- * @array: Pointer to the array.
- * @l: Index of the left subarray.
- * @r: Index of the right subarray.
- */
-void merge_sort_recursive(int *array, size_t l, size_t r) {
-    if (l < r) {
-        size_t m = l + (r - l) / 2;
-        merge_sort_recursive(array, l, m);
-        merge_sort_recursive(array, m + 1, r);
-        merge(array, l, m, r);
-    }
-}
-
-/**
- * merge_sort - Sort an array of integers using the Merge Sort algorithm.
- * @array: Pointer to the array.
- * @size: Size of the array.
- */
 void merge_sort(int *array, size_t size) {
     if (size > 1) {
-        merge_sort_recursive(array, 0, size - 1);
+        size_t m = size / 2;
+        merge_sort(array, m);
+        merge_sort(array + m, size - m);
+        merge(array, 0, m - 1, size - 1);
     }
 }
-
-/* O(n log n) for best, average, and worst cases */
-
