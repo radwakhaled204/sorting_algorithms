@@ -1,4 +1,5 @@
 #include "sort.h"
+
 void merge(int *array, size_t l, size_t m, size_t r) {
     size_t n1 = m - l + 1;
     size_t n2 = r - m;
@@ -61,3 +62,4 @@ void merge_sort(int *array, size_t size) {
         merge(array, 0, m - 1, size - 1);
     }
 }
+
