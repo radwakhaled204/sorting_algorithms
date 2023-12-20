@@ -55,9 +55,9 @@ int partition(int *array, int low, int high, size_t size)
 
 void quick_sort_rec(int *array, int low, int high, size_t size)
 {
-	int pi; 
+	int pi;
 
-	if (low < high) 
+	if (low < high)
 	{
 		pi = partition(array, low, high, size);
 		quick_sort_rec(array, low, pi - 1, size);
