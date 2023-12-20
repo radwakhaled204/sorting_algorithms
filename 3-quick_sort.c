@@ -1,9 +1,9 @@
 #include "sort.h"
 
 /**
- * swap - Swap two integers.
- * @a: The first integer to be swapped.
- * @b: The second integer to be swapped.
+ * swap - swaps two elements in an array
+ * @a: first element to swap
+ * @b: second element to swap
  */
 
 void swap(int *a, int *b)
@@ -25,22 +25,23 @@ void swap(int *a, int *b)
 int partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high];
-	int x = low - 1;
+	int i = low - 1;
+	int j;
 
-	for (int y = low; y < high; y++)
+	for (j = low; j < high; j++)
 	{
-		if (array[y] <= pivot)
+		if (array[j] <= pivot)
 		{
-			x++;
-			swap(&array[x], &array[y]);
-			if (x != y)
+			i++;
+			swap(&array[i], &array[j]);
+			if (i != j)
 			print_array(array, size);
 		}
 	}
-	swap(&array[x + 1], &array[high]);
-	if (x + 1 != high)
+	swap(&array[i + 1], &array[high]);
+	if (i + 1 != high)
 		print_array(array, size);
-	return (x + 1);
+	return (i + 1);
 }
 
 /**
@@ -54,10 +55,11 @@ int partition(int *array, int low, int high, size_t size)
 
 void quick_sort_rec(int *array, int low, int high, size_t size)
 {
+	int pi;
+
 	if (low < high)
 	{
-		int pi = partition(array, low, high, size);
-
+		pi = partition(array, low, high, size);
 		quick_sort_rec(array, low, pi - 1, size);
 		quick_sort_rec(array, pi + 1, high, size);
 	}

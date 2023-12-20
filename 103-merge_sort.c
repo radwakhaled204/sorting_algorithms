@@ -65,3 +65,4 @@ void merge_sort(int *array, size_t size)
 		merge(array, 0, m - 1, size - 1);
 	}
 }
+
